@@ -8,6 +8,7 @@
 #include "module3.h"
 
 #define MAX_LOADSTRING 100
+wchar_t user_choice[256] = L"";
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -139,6 +140,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 work1(hWnd);
                 break;
             case ID_ACTIONS_WORK2:
+                work3(hWnd);
                 break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
@@ -198,4 +200,11 @@ void work1(HWND hWnd) {
 void work2(HWND hWnd) {
     int result = Func_MOD2(hWnd, hInst);
     if (result == -1) work1(hWnd);
+}
+
+void work3(HWND hWnd) {
+    INT_PTR result = Func_MOD3(hWnd, hInst);
+    if (result != 0) {
+        MessageBox(hWnd, (LPCWSTR)result, L"Вибір користувача", MB_OK);
+    }
 }

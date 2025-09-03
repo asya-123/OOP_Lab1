@@ -1,9 +1,9 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by module2.rc
+// Used by module3.rc
 //
-#define IDD_DIALOG2                     102
-#define ID_BACK                         1001
+#define IDD_DIALOG3                     103
+#define IDC_LIST1                       1001
 
 // Next default values for new objects
 // 

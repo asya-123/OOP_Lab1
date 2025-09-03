@@ -2,7 +2,7 @@
 // Microsoft Visual C++ generated include file.
 // Used by module1.rc
 //
-#define IDD_DIALOG1                     103
+#define IDD_DIALOG1                     101
 #define IDCANCEL                        2
 #define ID_NEXT                         1002
 
