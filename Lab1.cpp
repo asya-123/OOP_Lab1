@@ -7,8 +7,9 @@
 #include "module2.h"
 #include "module3.h"
 
+wchar_t gSelectedText[256] = L"";
+
 #define MAX_LOADSTRING 100
-wchar_t user_choice[256] = L"";
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -157,7 +158,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
+            SetTextColor(hdc, RGB(0, 0, 255));
+            SetBkMode(hdc, TRANSPARENT);
+
+            if (gSelectedText[0] != L'\0') {
+                TextOut(hdc, 50, 50, gSelectedText, lstrlen(gSelectedText));
+            }
             EndPaint(hWnd, &ps);
         }
         break;
@@ -203,8 +209,8 @@ void work2(HWND hWnd) {
 }
 
 void work3(HWND hWnd) {
-    INT_PTR result = Func_MOD3(hWnd, hInst);
-    if (result != 0) {
-        MessageBox(hWnd, (LPCWSTR)result, L"Вибір користувача", MB_OK);
+    int result = Func_MOD3(hWnd, hInst);
+    if (result == 1) {
+        InvalidateRect(hWnd, NULL, TRUE);
     }
 }
