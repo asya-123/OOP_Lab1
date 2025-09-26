@@ -7,14 +7,13 @@
 #include "module2.h"
 #include "module3.h"
 
-wchar_t gSelectedText[256] = L"";
-
 #define MAX_LOADSTRING 100
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+WCHAR text[256];
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -159,11 +158,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             SetTextColor(hdc, RGB(0, 0, 255));
-            SetBkMode(hdc, TRANSPARENT);
-
-            if (gSelectedText[0] != L'\0') {
-                TextOut(hdc, 50, 50, gSelectedText, lstrlen(gSelectedText));
-            }
+            TextOut(hdc, 50, 50, text, lstrlen(text));
             EndPaint(hWnd, &ps);
         }
         break;
@@ -209,7 +204,7 @@ void work2(HWND hWnd) {
 }
 
 void work3(HWND hWnd) {
-    int result = Func_MOD3(hWnd, hInst);
+    int result = Func_MOD3(hWnd, hInst, text);
     if (result == 1) {
         InvalidateRect(hWnd, NULL, TRUE);
     }

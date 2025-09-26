@@ -5,8 +5,11 @@
 
 static INT_PTR CALLBACK Work3(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
-int Func_MOD3(HWND hWnd, HINSTANCE hI) {
-    return DialogBoxParam(hI, MAKEINTRESOURCE(IDD_DIALOG3), hWnd, Work3, 0);
+static WCHAR* tmp;
+
+int Func_MOD3(HWND hWnd, HINSTANCE hI, WCHAR* dest) {
+    tmp = dest;
+    return DialogBox(hI, MAKEINTRESOURCE(IDD_DIALOG3), hWnd, Work3);
 }
 
 INT_PTR CALLBACK Work3(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
@@ -27,7 +30,7 @@ INT_PTR CALLBACK Work3(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         {
             int indx = SendDlgItemMessage(hDlg, IDC_LIST1, LB_GETCURSEL, 0, 0);
             if (indx != LB_ERR) {
-                SendDlgItemMessage(hDlg, IDC_LIST1, LB_GETTEXT, indx, (LPARAM)gSelectedText);
+                SendDlgItemMessage(hDlg, IDC_LIST1, LB_GETTEXT, indx, (LPARAM)tmp);
             }
             EndDialog(hDlg, 1);
             return (INT_PTR)TRUE;
